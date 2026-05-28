@@ -87,10 +87,13 @@
     .modal-footer { padding: 12px 18px 20px; border-top: 0.5px solid #E5E7EB; flex-shrink: 0; }
 
     /* Adicionar membro */
-    .add-row { display: flex; gap: 8px; margin-bottom: 16px; }
+    .add-row { display: flex; gap: 8px; margin-bottom: 8px; }
     .add-row input { flex: 1; padding: 10px 12px; border: 1.5px solid #E5E7EB; border-radius: 10px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; }
     .add-row input:focus { border-color: #4A60FF; }
     .btn-add { background: #4A60FF; color: #fff; border: none; border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .genero-row { display: flex; gap: 8px; align-items: center; }
+    .genero-btn { flex: 1; padding: 8px; border: 1.5px solid #E5E7EB; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; background: #f4f7fc; color: #9095A0; transition: all 0.15s; }
+    .genero-btn.ativo { background: #4A60FF; color: #fff; border-color: #4A60FF; }
 
     /* Lista de membros no modal */
     .membro-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid #f0f0f0; }
@@ -106,7 +109,7 @@
     .toggle-lider.ativo   { background: #dbeafe; color: #1e3a8a; border-color: #3b82f6; }
     .toggle-lider.inativo { background: #f4f7fc; color: #9095A0; border-color: #E5E7EB; }
     .toggle-homem.ativo   { background: #e0f2fe; color: #0369a1; border-color: #38bdf8; }
-    .toggle-homem.inativo { background: #f4f7fc; color: #9095A0; border-color: #E5E7EB; }
+    .toggle-mulher.ativo  { background: #fce7f3; color: #9d174d; border-color: #ec4899; }
     .toggle-assess.ativo  { background: #dcfce7; color: #166534; border-color: #22c55e; }
     .toggle-assess.inativo{ background: #f4f7fc; color: #9095A0; border-color: #E5E7EB; }
     .btn-remover-membro { background: #fee2e2; color: #b91c1c; border: none; border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600; cursor: pointer; }
@@ -207,6 +210,10 @@
         <p class="add-label">Adicionar novo membro</p>
         <div class="add-row">
           <input id="inputNovoNome" type="text" placeholder="Nome completo..." onkeydown="if(event.key==='Enter') adicionarMembro()">
+        </div>
+        <div class="genero-row">
+          <button class="genero-btn ativo" id="btnMulher" onclick="selecionarGenero('mulher')">♀ Mulher</button>
+          <button class="genero-btn" id="btnHomem" onclick="selecionarGenero('homem')">♂ Homem</button>
           <button class="btn-add" onclick="adicionarMembro()">+ Adicionar</button>
         </div>
       </div>
@@ -276,33 +283,32 @@
     {nome:"Yuri Oliveira", homem:true, lider:false, assessoria:false},
   ];
 
-  // ========== FIREBASE SYNC ==========
-  const FB_API_KEY   = 'AIzaSyA1qkvekwE50TOCjDeztxQ0ARi38rM8U50';
-  const FB_PROJECT   = 'bemvindos-993d2';
-  const FB_DOC_URL   = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/config/membros`;
+  // ========== SUPABASE SYNC ==========
+  const SB_URL  = 'https://fkpcavsecvhxvojajgjo.supabase.co';
+  const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZrcGNhdnNlY3ZoeHZvamFqZ2pvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNjIwMTgsImV4cCI6MjA5MzczODAxOH0.cnJsyprHwx6WfeBGEdurUJ6rAy9nztS2rmJzrjys_6E';
+  const SB_HDR  = { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` };
 
   async function carregarMembrosDB(){
     try {
-      const r = await fetch(`${FB_DOC_URL}?key=${FB_API_KEY}`);
-      if(r.status === 404) return null; // documento ainda não existe
+      const r = await fetch(`${SB_URL}/rest/v1/membros?select=dados&order=id.desc&limit=1`, { headers: SB_HDR });
       if(!r.ok) throw new Error('erro leitura');
-      const doc = await r.json();
-      const raw = doc.fields?.dados?.stringValue;
-      return raw ? JSON.parse(raw) : null;
+      const rows = await r.json();
+      if(rows.length === 0) return null;
+      return typeof rows[0].dados === 'string' ? JSON.parse(rows[0].dados) : rows[0].dados;
     } catch(e){ console.error('Erro ao carregar:', e); return null; }
   }
 
   async function salvarMembrosDB(){
     try {
-      const body = {
-        fields: {
-          dados: { stringValue: JSON.stringify(membros) }
-        }
-      };
-      const r = await fetch(`${FB_DOC_URL}?key=${FB_API_KEY}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
+      // Apaga registro antigo e insere novo (upsert simples)
+      await fetch(`${SB_URL}/rest/v1/membros`, {
+        method: 'DELETE',
+        headers: { ...SB_HDR, 'Prefer': 'return=minimal' }
+      });
+      const r = await fetch(`${SB_URL}/rest/v1/membros`, {
+        method: 'POST',
+        headers: { ...SB_HDR, 'Prefer': 'return=minimal' },
+        body: JSON.stringify({ dados: JSON.stringify(membros) })
       });
       if(!r.ok) throw new Error(await r.text());
       mostrarStatus('✓ Salvo para todos', '#22c55e');
@@ -327,7 +333,7 @@
   }
 
   // ========== PERSISTÊNCIA ==========
-  function carregarMembros(){
+  function carregarMembrosLocal(){
     try {
       const s = localStorage.getItem('membros_ministerio');
       return s ? JSON.parse(s) : JSON.parse(JSON.stringify(MEMBROS_BASE));
@@ -342,19 +348,8 @@
     await salvarMembrosDB();
   }
 
-  let membros = carregarMembros();
+  let membros = carregarMembrosLocal();
 
-  // Ao iniciar, carrega do Supabase (versão compartilhada por todos)
-  carregarMembrosDB().then(dados => {
-    if(dados && dados.length > 0){
-      membros = dados;
-      localStorage.setItem('membros_ministerio', JSON.stringify(membros));
-      reconstruirListas();
-      mudarCulto();
-    }
-  });
-
-  // ========== LISTAS DERIVADAS ==========
   function getMembros()    { return membros.map(m=>m.nome).sort(); }
   function getLideres()    { return membros.filter(m=>m.lider).map(m=>m.nome).sort(); }
   function getAssessoria() { return membros.filter(m=>m.assessoria && !m.homem).map(m=>m.nome).sort(); }
@@ -588,7 +583,7 @@
       <div class="membro-item" id="item_${encodeURIComponent(m.nome)}">
         <span class="membro-nome${m.homem?' homem':''}">${m.nome}</span>
         <div class="membro-acoes">
-          <button class="toggle-btn toggle-homem ${m.homem?'ativo':'inativo'}"
+          <button class="toggle-btn ${m.homem?'toggle-homem ativo':'toggle-mulher ativo'}"
             data-acao="homem" data-nome="${encodeURIComponent(m.nome)}">
             ${m.homem?'Homem':'Mulher'}
           </button>
@@ -650,20 +645,45 @@
     renderListaModal();
   });
 
+  let novoMembroHomem = false; // padrão mulher
+
+  function selecionarGenero(g){
+    novoMembroHomem = (g === 'homem');
+    document.getElementById('btnHomem').classList.toggle('ativo', novoMembroHomem);
+    document.getElementById('btnMulher').classList.toggle('ativo', !novoMembroHomem);
+  }
+
   function adicionarMembro(){
     const input=document.getElementById('inputNovoNome');
     const nome=input.value.trim();
     if(!nome){input.focus();return;}
     if(membros.find(m=>m.nome.toLowerCase()===nome.toLowerCase())){alert('Este nome já existe na lista.');return;}
-    membros.push({nome, homem:false, lider:false, assessoria:false});
+    membros.push({nome, homem: novoMembroHomem, lider:false, assessoria:false});
     input.value='';
+    // Resetar para mulher após adicionar
+    novoMembroHomem = false;
+    selecionarGenero('mulher');
     salvarMembros();
     renderListaModal();
   }
 
   // Init
+  reconstruirListas();
   resetPresencas();
   mudarCulto();
+
+  // Sobrescreve com Firebase (fonte verdadeira para todos)
+  carregarMembrosDB().then(dados => {
+    if(dados && dados.length > 0){
+      membros = dados;
+      localStorage.setItem('membros_ministerio', JSON.stringify(membros));
+    } else if(dados !== null){
+      salvarMembrosDB(); // Firebase vazio — sobe dados locais
+    }
+    reconstruirListas();
+    resetPresencas();
+    mudarCulto();
+  }).catch(() => { /* Firebase indisponível — usa local */ });
 </script>
 </body>
 </html>
