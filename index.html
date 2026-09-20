@@ -87,10 +87,13 @@
     .modal-footer { padding: 12px 18px 20px; border-top: 0.5px solid #E5E7EB; flex-shrink: 0; }
 
     /* Adicionar membro */
-    .add-row { display: flex; gap: 8px; margin-bottom: 16px; }
+    .add-row { display: flex; gap: 8px; margin-bottom: 8px; }
     .add-row input { flex: 1; padding: 10px 12px; border: 1.5px solid #E5E7EB; border-radius: 10px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; }
     .add-row input:focus { border-color: #4A60FF; }
     .btn-add { background: #4A60FF; color: #fff; border: none; border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .genero-row { display: flex; gap: 8px; align-items: center; }
+    .genero-btn { flex: 1; padding: 8px; border: 1.5px solid #E5E7EB; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; background: #f4f7fc; color: #9095A0; transition: all 0.15s; }
+    .genero-btn.ativo { background: #4A60FF; color: #fff; border-color: #4A60FF; }
 
     /* Lista de membros no modal */
     .membro-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid #f0f0f0; }
@@ -106,7 +109,7 @@
     .toggle-lider.ativo   { background: #dbeafe; color: #1e3a8a; border-color: #3b82f6; }
     .toggle-lider.inativo { background: #f4f7fc; color: #9095A0; border-color: #E5E7EB; }
     .toggle-homem.ativo   { background: #e0f2fe; color: #0369a1; border-color: #38bdf8; }
-    .toggle-homem.inativo { background: #f4f7fc; color: #9095A0; border-color: #E5E7EB; }
+    .toggle-mulher.ativo  { background: #fce7f3; color: #9d174d; border-color: #ec4899; }
     .toggle-assess.ativo  { background: #dcfce7; color: #166534; border-color: #22c55e; }
     .toggle-assess.inativo{ background: #f4f7fc; color: #9095A0; border-color: #E5E7EB; }
     .btn-remover-membro { background: #fee2e2; color: #b91c1c; border: none; border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600; cursor: pointer; }
@@ -207,6 +210,10 @@
         <p class="add-label">Adicionar novo membro</p>
         <div class="add-row">
           <input id="inputNovoNome" type="text" placeholder="Nome completo..." onkeydown="if(event.key==='Enter') adicionarMembro()">
+        </div>
+        <div class="genero-row">
+          <button class="genero-btn ativo" id="btnMulher" onclick="selecionarGenero('mulher')">♀ Mulher</button>
+          <button class="genero-btn" id="btnHomem" onclick="selecionarGenero('homem')">♂ Homem</button>
           <button class="btn-add" onclick="adicionarMembro()">+ Adicionar</button>
         </div>
       </div>
@@ -219,93 +226,94 @@
 <script>
   // ========== DADOS BASE (fallback se localStorage vazio) ==========
   const MEMBROS_BASE = [
-    {nome:"Adasia Gomes", homem:false, lider:false, assessoria:false},
-    {nome:"Alvanice", homem:false, lider:false, assessoria:false},
-    {nome:"Aldrin Bernardino", homem:true, lider:false, assessoria:false},
-    {nome:"Amaury Silva", homem:true, lider:true, assessoria:false},
-    {nome:"Ana Carolina Dias", homem:false, lider:false, assessoria:false},
-    {nome:"Ana Célia Firmino", homem:false, lider:false, assessoria:false},
-    {nome:"Ana Lucia Barbosa", homem:false, lider:false, assessoria:false},
-    {nome:"Ana Lúcia Mendes", homem:false, lider:false, assessoria:false},
-    {nome:"Ana Lucia Rodrigues", homem:false, lider:false, assessoria:true},
-    {nome:"Ana Maria", homem:false, lider:false, assessoria:false},
-    {nome:"André Afonso", homem:true, lider:false, assessoria:false},
-    {nome:"Andre da Silva", homem:true, lider:false, assessoria:false},
-    {nome:"Andressa Lipovetsky", homem:false, lider:false, assessoria:true},
-    {nome:"Bernardo Barros", homem:true, lider:false, assessoria:false},
-    {nome:"Carla Barretto", homem:false, lider:false, assessoria:false},
-    {nome:"Carolina Carvalho", homem:false, lider:false, assessoria:false},
-    {nome:"Carolina Silva", homem:false, lider:false, assessoria:false},
-    {nome:"Caroline Oliveira", homem:false, lider:false, assessoria:false},
-    {nome:"Claudia Gomes", homem:false, lider:false, assessoria:false},
-    {nome:"Deborah Ferreira", homem:false, lider:false, assessoria:false},
-    {nome:"Edite Mendes", homem:false, lider:false, assessoria:false},
-    {nome:"Fábio Leal", homem:true, lider:false, assessoria:false},
-    {nome:"Flávia Afonso", homem:false, lider:false, assessoria:false},
-    {nome:"Flávia Hermínio", homem:false, lider:false, assessoria:false},
-    {nome:"Flávia Rodrigues", homem:false, lider:false, assessoria:true},
-    {nome:"Flávia Tavares", homem:false, lider:false, assessoria:false},
-    {nome:"Flávio Santos", homem:true, lider:false, assessoria:false},
-    {nome:"Fátima Torres", homem:false, lider:false, assessoria:false},
-    {nome:"Gabriel Azevedo", homem:true, lider:false, assessoria:false},
-    {nome:"Gabriel Elias", homem:true, lider:false, assessoria:false},
-    {nome:"Gabriel Lima", homem:true, lider:false, assessoria:false},
-    {nome:"Gabriel Oliveira", homem:true, lider:false, assessoria:false},
-    {nome:"Gabriel Reis", homem:true, lider:false, assessoria:false},
-    {nome:"Gabriele Costa", homem:false, lider:false, assessoria:false},
-    {nome:"Gabriella Marques", homem:false, lider:false, assessoria:false},
-    {nome:"Guilherme Coelho", homem:true, lider:false, assessoria:false},
-    {nome:"Helenice Araujo", homem:false, lider:false, assessoria:false},
-    {nome:"Ihully Aguiar", homem:false, lider:false, assessoria:false},
-    {nome:"Isaac Gome", homem:true, lider:false, assessoria:false},
-    {nome:"Janaina Heringer", homem:false, lider:false, assessoria:false},
-    {nome:"Jaqueline do Carmo", homem:false, lider:false, assessoria:false},
-    {nome:"João Do Carmo", homem:true, lider:true, assessoria:false},
-    {nome:"João Vitor", homem:true, lider:false, assessoria:false},
-    {nome:"Juliana Gonçalves", homem:false, lider:false, assessoria:false},
-    {nome:"Juliana Lages", homem:false, lider:false, assessoria:false},
-    {nome:"Juliana Souza", homem:false, lider:false, assessoria:true},
-    {nome:"Júlio Costa", homem:true, lider:false, assessoria:false},
-    {nome:"Larissa Araújo", homem:false, lider:false, assessoria:true},
-    {nome:"Laura Gonzaga", homem:false, lider:false, assessoria:false},
-    {nome:"Laura Martins", homem:false, lider:false, assessoria:false},
-    {nome:"Leonardo Renzetti", homem:true, lider:true, assessoria:false},
-    {nome:"Leonardo Silva", homem:true, lider:true, assessoria:false},
-    {nome:"Lohanya Pomponet", homem:false, lider:false, assessoria:false},
-    {nome:"Lucas Gabriel", homem:true, lider:false, assessoria:false},
-    {nome:"Luciana Galvão", homem:false, lider:false, assessoria:true},
-    {nome:"Marcele Mattos", homem:false, lider:false, assessoria:false},
-    {nome:"Marco Costa", homem:true, lider:false, assessoria:false},
-    {nome:"Marco Torres", homem:true, lider:false, assessoria:false},
-    {nome:"Marcus Nascimento", homem:true, lider:true, assessoria:false},
-    {nome:"Maria Luiza Cury", homem:false, lider:false, assessoria:false},
-    {nome:"Mariana Pacheco", homem:false, lider:false, assessoria:false},
-    {nome:"Mariangela Rodrigues", homem:false, lider:false, assessoria:false},
-    {nome:"Matheus Marques", homem:true, lider:true, assessoria:false},
-    {nome:"Márcio Rodrigues", homem:true, lider:false, assessoria:false},
-    {nome:"Nelson Strufaldi", homem:true, lider:false, assessoria:false},
-    {nome:"Nilton Silva", homem:true, lider:true, assessoria:false},
-    {nome:"Nivia Moura", homem:false, lider:false, assessoria:false},
-    {nome:"Pablo Souza", homem:true, lider:true, assessoria:false},
-    {nome:"Patricia Madeira", homem:false, lider:false, assessoria:true},
-    {nome:"Priscila Vieira", homem:false, lider:false, assessoria:false},
-    {nome:"Raisa Aragão", homem:false, lider:false, assessoria:false},
-    {nome:"Raíssa Barros", homem:false, lider:false, assessoria:false},
-    {nome:"Raphael Ventura", homem:true, lider:false, assessoria:false},
-    {nome:"Raylla Ventura", homem:false, lider:false, assessoria:false},
-    {nome:"Salomão André", homem:true, lider:false, assessoria:false},
-    {nome:"Sandro", homem:true, lider:false, assessoria:false},
-    {nome:"Sérgio Rodrigues", homem:true, lider:true, assessoria:false},
-    {nome:"Talyta Renzetti", homem:false, lider:false, assessoria:false},
-    {nome:"Tamires Andrade", homem:false, lider:false, assessoria:false},
-    {nome:"Tatiane Amaral", homem:false, lider:false, assessoria:false},
-    {nome:"Taylor Lipovetsky", homem:true, lider:true, assessoria:false},
-    {nome:"Thayná Caetano", homem:false, lider:false, assessoria:false},
-    {nome:"Victor Pomponet", homem:true, lider:false, assessoria:false},
-    {nome:"Vinicius Araujo", homem:true, lider:true, assessoria:false},
-    {nome:"Vitória Belle", homem:false, lider:false, assessoria:false},
-    {nome:"Yuri Oliveira", homem:true, lider:false, assessoria:false},
-  ];
+  {"nome":"Adasia Gomes","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Aldrin Bernardino","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Alvanice","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Amaury Silva","homem":true,"lider":true,"assessoria":false},
+  {"nome":"Ana Carolina Dias","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Ana Célia Firmino","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Ana Lucia Mendes","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Ana Lúcia Barbosa","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Ana Lúcia Rodrigues","homem":false,"lider":false,"assessoria":true},
+  {"nome":"Ana Maria","homem":false,"lider":false,"assessoria":false},
+  {"nome":"André Afonso","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Andre da Silva","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Andressa Lipovetsky","homem":false,"lider":false,"assessoria":true},
+  {"nome":"Bernardo Barros","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Carla Barretto","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Carolina Carvalho","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Carolina Silva","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Caroline Oliveira","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Claudia Gomes","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Deborah Ferreira","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Edite Mendes","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Fábio Leal","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Fátima Torres","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Flavia Afonso","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Flávia Hermínio","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Flávia Rodrigues","homem":false,"lider":false,"assessoria":true},
+  {"nome":"Flávia Tavares","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Flávio Santos","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Gabriel Azevedo","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Gabriel Elias","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Gabriel Lima","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Gabriel Oliveira","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Gabriel Reis","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Gabriele Costa","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Gabriella Marques","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Guilherme Coelho","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Helenice Araujo","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Ihully Aguiar","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Isaac Gome","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Janaina Heringer","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Jaqueline do Carmo","homem":false,"lider":false,"assessoria":false},
+  {"nome":"João do Carmo","homem":true,"lider":true,"assessoria":false},
+  {"nome":"João Vitor","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Juliana Gonçalves","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Juliana Lages","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Juliana Souza","homem":false,"lider":false,"assessoria":true},
+  {"nome":"Júlio Costa","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Larissa Araújo","homem":false,"lider":false,"assessoria":true},
+  {"nome":"Laura Martins","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Laura Gonzaga","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Leonardo Silva","homem":true,"lider":true,"assessoria":false},
+  {"nome":"Leonardo Renzetti","homem":true,"lider":true,"assessoria":false},
+  {"nome":"Lucas Gabriel","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Lohanya Pomponet","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Luciana Galvão","homem":false,"lider":false,"assessoria":true},
+  {"nome":"Marcele Mattos","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Marco Costa","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Marco Torres","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Marcus Nascimento","homem":true,"lider":true,"assessoria":false},
+  {"nome":"Mariana Pacheco","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Mariangela Rodrigues","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Maria Luiza Cury","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Márcio Rodrigues","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Matheus Marques","homem":true,"lider":true,"assessoria":false},
+  {"nome":"Nelson Strufaldi","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Nilton Silva","homem":true,"lider":true,"assessoria":false},
+  {"nome":"Nivia Moura","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Pablo Souza","homem":true,"lider":true,"assessoria":false},
+  {"nome":"Patricia Madeira","homem":false,"lider":false,"assessoria":true},
+  {"nome":"Priscila Vieira","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Raisa Aragão","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Raíssa Barros","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Raphael Ventura","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Raylla Ventura","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Salomão André","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Sandro","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Sérgio Rodrigues","homem":true,"lider":true,"assessoria":false},
+  {"nome":"Talyta Renzetti","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Tamires Andrade","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Tatiane Amaral","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Taylor Lipovetsky","homem":true,"lider":true,"assessoria":false},
+  {"nome":"Thayná Caetano","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Victor Pomponet","homem":true,"lider":false,"assessoria":false},
+  {"nome":"Vinicius Araujo","homem":true,"lider":true,"assessoria":false},
+  {"nome":"Vitória Belle","homem":false,"lider":false,"assessoria":false},
+  {"nome":"Yuri Oliveira","homem":true,"lider":false,"assessoria":false}
+];
+
   // ========== FIREBASE SYNC ==========
   const FB_API_KEY = 'AIzaSyA1qkvekwE50TOCjDeztxQ0ARi38rM8U50';
   const FB_PROJECT = 'bemvindos-993d2';
@@ -352,8 +360,9 @@
     setTimeout(() => el.style.opacity = '0', 2500);
   }
 
+
   // ========== PERSISTÊNCIA ==========
-  function carregarMembros(){
+  function carregarMembrosLocal(){
     try {
       const s = localStorage.getItem('membros_ministerio');
       return s ? JSON.parse(s) : JSON.parse(JSON.stringify(MEMBROS_BASE));
@@ -368,19 +377,8 @@
     await salvarMembrosDB();
   }
 
-  let membros = carregarMembros();
+  let membros = carregarMembrosLocal();
 
-  // Ao iniciar, carrega do Supabase (versão compartilhada por todos)
-  carregarMembrosDB().then(dados => {
-    if(dados && dados.length > 0){
-      membros = dados;
-      localStorage.setItem('membros_ministerio', JSON.stringify(membros));
-      reconstruirListas();
-      mudarCulto();
-    }
-  });
-
-  // ========== LISTAS DERIVADAS ==========
   function getMembros()    { return membros.map(m=>m.nome).sort(); }
   function getLideres()    { return membros.filter(m=>m.lider).map(m=>m.nome).sort(); }
   function getAssessoria() { return membros.filter(m=>m.assessoria && !m.homem).map(m=>m.nome).sort(); }
@@ -614,7 +612,7 @@
       <div class="membro-item" id="item_${encodeURIComponent(m.nome)}">
         <span class="membro-nome${m.homem?' homem':''}">${m.nome}</span>
         <div class="membro-acoes">
-          <button class="toggle-btn toggle-homem ${m.homem?'ativo':'inativo'}"
+          <button class="toggle-btn ${m.homem?'toggle-homem ativo':'toggle-mulher ativo'}"
             data-acao="homem" data-nome="${encodeURIComponent(m.nome)}">
             ${m.homem?'Homem':'Mulher'}
           </button>
@@ -676,20 +674,45 @@
     renderListaModal();
   });
 
+  let novoMembroHomem = false; // padrão mulher
+
+  function selecionarGenero(g){
+    novoMembroHomem = (g === 'homem');
+    document.getElementById('btnHomem').classList.toggle('ativo', novoMembroHomem);
+    document.getElementById('btnMulher').classList.toggle('ativo', !novoMembroHomem);
+  }
+
   function adicionarMembro(){
     const input=document.getElementById('inputNovoNome');
     const nome=input.value.trim();
     if(!nome){input.focus();return;}
     if(membros.find(m=>m.nome.toLowerCase()===nome.toLowerCase())){alert('Este nome já existe na lista.');return;}
-    membros.push({nome, homem:false, lider:false, assessoria:false});
+    membros.push({nome, homem: novoMembroHomem, lider:false, assessoria:false});
     input.value='';
+    // Resetar para mulher após adicionar
+    novoMembroHomem = false;
+    selecionarGenero('mulher');
     salvarMembros();
     renderListaModal();
   }
 
   // Init
+  reconstruirListas();
   resetPresencas();
   mudarCulto();
+
+  // Sobrescreve com Firebase (fonte verdadeira para todos)
+  carregarMembrosDB().then(dados => {
+    if(dados && dados.length > 0){
+      membros = dados;
+      localStorage.setItem('membros_ministerio', JSON.stringify(membros));
+    } else if(dados !== null){
+      salvarMembrosDB(); // Firebase vazio — sobe dados locais
+    }
+    reconstruirListas();
+    resetPresencas();
+    mudarCulto();
+  }).catch(() => { /* Firebase indisponível — usa local */ });
 </script>
 </body>
 </html>
