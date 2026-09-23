@@ -29,20 +29,14 @@
     .slot select { padding: 8px 10px; border: 1px solid #ccc; border-left-width: 3px; border-radius: 10px; background: #fff; font-size: 13px; font-weight: 600; color: #2D3142; }
     .divider { height: 0.5px; background: #E5E7EB; margin: 14px 0; }
     .badge { font-size: 10px; background: #f0f3ff; border: 0.5px solid #4A60FF; border-radius: 20px; padding: 2px 8px; color: #4A60FF; margin-left: 6px; font-weight: 600; }
-
-    /* Salão */
     .salao-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .salao-header h3 { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
-    .btn-limpar { background: transparent; color: #9095A0; border: 1px solid #E5E7EB; border-radius: 10px; padding: 6px 10px; font-size: 12px; font-weight: 600; cursor: pointer; }
+    .btn-limpar { background: #fff0f0; color: #b91c1c; border: 1px solid #fecaca; border-radius: 10px; padding: 6px 10px; font-size: 12px; font-weight: 600; cursor: pointer; }
     .btn-gerar  { background: #4A60FF; color: #fff; border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 600; width: 100%; margin-top: 10px; cursor: pointer; box-shadow: 0 6px 15px rgba(74,96,255,0.3); }
-
-    /* Chips selecionados */
     .chips-selecionados { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
     .chip-sel { display: flex; align-items: center; gap: 5px; padding: 4px 10px 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #4A60FF; color: #fff; }
     .chip-sel .rem { cursor: pointer; font-size: 15px; line-height: 1; opacity: 0.75; margin-left: 2px; }
     .chip-sel .rem:hover { opacity: 1; }
-
-    /* Dropdown retrátil */
     .dropdown-wrap { position: relative; margin-bottom: 10px; }
     .dropdown-trigger { width: 100%; padding: 10px 14px; border: 1.5px dashed #C7D0FF; border-radius: 12px; background: #f8f9ff; color: #4A60FF; font-size: 13px; font-weight: 600; cursor: pointer; user-select: none; display: flex; align-items: center; justify-content: space-between; -webkit-tap-highlight-color: transparent; }
     .dropdown-trigger:active { background: #eef0ff; }
@@ -57,26 +51,14 @@
     .chip-nome:active { transform: scale(0.95); }
     .chip-nome.on  { background: #4A60FF; color: #fff; border-color: #4A60FF; }
     .chip-nome.ind { opacity: 0.3; pointer-events: none; text-decoration: line-through; }
-
-    /* Botão distribuir */
     .dist-footer { margin-top: 14px; padding-top: 12px; border-top: 1px solid #E5E7EB; }
     .btn-dist-panel { width: 100%; padding: 12px; background: #4A60FF; color: #fff; border: none; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(74,96,255,0.35); transition: opacity 0.15s; }
     .btn-dist-panel:active { opacity: 0.85; }
-
-    /* Resultado */
     .area-resultado { text-align: center; display: none; }
     .area-resultado img { max-width: 100%; border-radius: 12px; margin-top: 10px; }
     canvas { display: none; }
-
-    /* ===== PAINEL DE GESTÃO DE MEMBROS ===== */
-    .btn-gestao { 
-      display: block; width: 100%; padding: 10px; margin-bottom: 14px;
-      background: transparent; border: 1px solid #E5E7EB; border-radius: 12px;
-      font-size: 13px; font-weight: 600; color: #9095A0; cursor: pointer;
-      text-align: center; letter-spacing: 0.01em;
-    }
+    .btn-gestao { display: block; width: 100%; padding: 10px; margin-bottom: 14px; background: transparent; border: 1px solid #E5E7EB; border-radius: 12px; font-size: 13px; font-weight: 600; color: #9095A0; cursor: pointer; text-align: center; }
     .btn-gestao:active { background: #f4f7fc; }
-
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 100; align-items: flex-end; justify-content: center; }
     .modal-overlay.aberto { display: flex; }
     .modal { background: #fff; border-radius: 24px 24px 0 0; width: 100%; max-width: 600px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
@@ -85,8 +67,6 @@
     .btn-fechar { background: #f4f7fc; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #9095A0; }
     .modal-body { overflow-y: auto; padding: 16px 18px; flex: 1; }
     .modal-footer { padding: 12px 18px 20px; border-top: 0.5px solid #E5E7EB; flex-shrink: 0; }
-
-    /* Adicionar membro */
     .add-row { display: flex; gap: 8px; margin-bottom: 8px; }
     .add-row input { flex: 1; padding: 10px 12px; border: 1.5px solid #E5E7EB; border-radius: 10px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; }
     .add-row input:focus { border-color: #4A60FF; }
@@ -94,16 +74,10 @@
     .genero-row { display: flex; gap: 8px; align-items: center; }
     .genero-btn { flex: 1; padding: 8px; border: 1.5px solid #E5E7EB; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; background: #f4f7fc; color: #9095A0; transition: all 0.15s; }
     .genero-btn.ativo { background: #4A60FF; color: #fff; border-color: #4A60FF; }
-
-    /* Lista de membros no modal */
     .membro-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid #f0f0f0; }
     .membro-item:last-child { border-bottom: none; }
     .membro-nome { flex: 1; font-size: 14px; font-weight: 500; }
     .membro-nome.homem { color: #3b82f6; }
-    .tag-lider { font-size: 10px; font-weight: 700; background: #dbeafe; color: #1e3a8a; border-radius: 20px; padding: 2px 8px; }
-    .tag-homem { font-size: 10px; font-weight: 700; background: #e0f2fe; color: #0369a1; border-radius: 20px; padding: 2px 8px; }
-
-    /* Toggles do membro */
     .membro-acoes { display: flex; gap: 6px; align-items: center; }
     .toggle-btn { font-size: 11px; font-weight: 600; border-radius: 20px; padding: 3px 10px; cursor: pointer; border: 1px solid; transition: all 0.15s; white-space: nowrap; }
     .toggle-lider.ativo   { background: #dbeafe; color: #1e3a8a; border-color: #3b82f6; }
@@ -113,26 +87,16 @@
     .toggle-assess.ativo  { background: #dcfce7; color: #166534; border-color: #22c55e; }
     .toggle-assess.inativo{ background: #f4f7fc; color: #9095A0; border-color: #E5E7EB; }
     .btn-remover-membro { background: #fee2e2; color: #b91c1c; border: none; border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600; cursor: pointer; }
-
-    .confirmar-remocao {
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-      background: #fff5f5; border: 1px solid #fecaca; border-radius: 10px;
-      padding: 8px 12px; margin-bottom: 6px; font-size: 12px; color: #7f1d1d;
-    }
+    .confirmar-remocao { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #fff5f5; border: 1px solid #fecaca; border-radius: 10px; padding: 8px 12px; margin-bottom: 6px; font-size: 12px; color: #7f1d1d; }
     .confirmar-remocao span { flex: 1; }
     .btn-conf-sim { background: #ef4444; color: #fff; border: none; border-radius: 8px; padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer; }
     .btn-conf-nao { background: #f4f7fc; color: #9095A0; border: 1px solid #E5E7EB; border-radius: 8px; padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer; }
-
     .filtro-row { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
     .filtro-btn { padding: 7px 10px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 12px; font-weight: 600; background: #f4f7fc; color: #9095A0; cursor: pointer; }
     .filtro-btn.ativo { background: #4A60FF; color: #fff; border-color: #4A60FF; }
-
-    /* Busca */
     .search-row { display: flex; align-items: center; gap: 8px; background: #f4f7fc; border: 1px solid #E5E7EB; border-radius: 10px; padding: 8px 12px; margin-bottom: 10px; }
     .search-icon { font-size: 14px; }
     .search-row input { flex: 1; border: none; background: transparent; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; color: #2D3142; }
-
-    /* Adicionar embaixo */
     .add-section { padding: 12px 18px 4px; border-top: 1px solid #E5E7EB; flex-shrink: 0; background: #fff; }
     .add-label { font-size: 11px; font-weight: 600; color: #9095A0; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
   </style>
@@ -149,7 +113,7 @@
   <div class="cartao">
     <div class="salao-header">
       <h3>Bem-Vindo Salão <span id="badgeSalao" class="badge">0 presentes</span></h3>
-      <button class="btn-limpar" onclick="limparSalao()">Limpar tudo</button>
+      <button class="btn-limpar" onclick="novaEscala()">🗑 Nova escala</button>
     </div>
     <div id="chipsSelecionados" class="chips-selecionados"></div>
     <div class="dropdown-wrap">
@@ -177,7 +141,6 @@
 
   <button class="btn-gestao" onclick="abrirGestao()">⚙️ Gerenciar membros do ministério</button>
 
-  <!-- Modal gestão -->
   <div class="modal-overlay" id="modalOverlay" onclick="fecharSeForaModal(event)">
     <div class="modal">
       <div class="modal-header">
@@ -185,27 +148,19 @@
         <button class="btn-fechar" onclick="fecharGestao()">×</button>
       </div>
       <div class="modal-body">
-
-        <!-- Busca -->
         <div class="search-row">
           <span class="search-icon">🔍</span>
           <input id="inputBusca" type="text" placeholder="Buscar nome..." oninput="renderListaModal()">
         </div>
-
-        <!-- Filtros -->
         <div class="filtro-row">
-          <button class="filtro-btn ativo" id="filtroTodos"       onclick="setFiltro('todos')">Todos</button>
-          <button class="filtro-btn"       id="filtroLideres"     onclick="setFiltro('lideres')">Líderes</button>
-          <button class="filtro-btn"       id="filtroAssessoria"  onclick="setFiltro('assessoria')">Assessoria</button>
-          <button class="filtro-btn"       id="filtroHomens"      onclick="setFiltro('homens')">Homens</button>
-          <button class="filtro-btn"       id="filtroMulheres"    onclick="setFiltro('mulheres')">Mulheres</button>
+          <button class="filtro-btn ativo" id="filtroTodos"      onclick="setFiltro('todos')">Todos</button>
+          <button class="filtro-btn"       id="filtroLideres"    onclick="setFiltro('lideres')">Líderes</button>
+          <button class="filtro-btn"       id="filtroAssessoria" onclick="setFiltro('assessoria')">Assessoria</button>
+          <button class="filtro-btn"       id="filtroHomens"     onclick="setFiltro('homens')">Homens</button>
+          <button class="filtro-btn"       id="filtroMulheres"   onclick="setFiltro('mulheres')">Mulheres</button>
         </div>
-
         <div id="listaMembrosModal"></div>
-
       </div>
-
-      <!-- Campo adicionar fixo acima do rodapé -->
       <div class="add-section" id="addSection">
         <p class="add-label">Adicionar novo membro</p>
         <div class="add-row">
@@ -224,7 +179,6 @@
   </div>
 
 <script>
-  // ========== DADOS BASE (fallback se localStorage vazio) ==========
   const MEMBROS_BASE = [
   {"nome":"Adasia Gomes","homem":false,"lider":false,"assessoria":false},
   {"nome":"Aldrin Bernardino","homem":true,"lider":false,"assessoria":false},
@@ -312,7 +266,7 @@
   {"nome":"Vinicius Araujo","homem":true,"lider":true,"assessoria":false},
   {"nome":"Vitória Belle","homem":false,"lider":false,"assessoria":false},
   {"nome":"Yuri Oliveira","homem":true,"lider":false,"assessoria":false}
-];
+  ];
 
   // ========== FIREBASE SYNC ==========
   const FB_API_KEY = 'AIzaSyA1qkvekwE50TOCjDeztxQ0ARi38rM8U50';
@@ -354,14 +308,11 @@
       el.style.cssText = 'position:fixed;bottom:20px;right:20px;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;color:#fff;z-index:999;transition:opacity 0.5s;';
       document.body.appendChild(el);
     }
-    el.textContent = msg;
-    el.style.background = cor;
-    el.style.opacity = '1';
+    el.textContent = msg; el.style.background = cor; el.style.opacity = '1';
     setTimeout(() => el.style.opacity = '0', 2500);
   }
 
-
-  // ========== PERSISTÊNCIA ==========
+  // ========== PERSISTÊNCIA MEMBROS ==========
   function carregarMembrosLocal(){
     try {
       const s = localStorage.getItem('membros_ministerio');
@@ -379,15 +330,85 @@
 
   let membros = carregarMembrosLocal();
 
+  // ========== ESTADO LOCAL DA ESCALA (por culto) ==========
+  function chaveEstado(){
+    const c = getCulto();
+    return c ? `escala_${c.value}` : null;
+  }
+
+  function salvarEstadoLocal(){
+    const culto = getCulto();
+    if(!culto) return; // guard: culto inválido
+    const chave = chaveEstado();
+    if(!chave) return;
+    const estado = { funcoes:{}, salao:{}, presentes:[] };
+    FUNCOES.forEach(f=>{
+      estado.funcoes[f.id] = [];
+      for(let i=0;i<f.slots;i++) estado.funcoes[f.id].push(document.getElementById(`func_${f.id}_${i}`)?.value||'');
+    });
+    for(let i=0;i<culto.salaoCount;i++) estado.salao[i] = document.getElementById(`salao_${i}`)?.value||'';
+    // Salva só quem ainda existe na lista atual (evita nomes de membros removidos)
+    estado.presentes = MEMBROS_LISTA.filter(n=>presSalao[n]);
+    try{ localStorage.setItem(chave, JSON.stringify(estado)); }catch(e){}
+  }
+
+  function restaurarEstadoLocal(){
+    const culto = getCulto();
+    if(!culto) return; // guard
+    const chave = chaveEstado();
+    if(!chave) return;
+    try{
+      const raw = localStorage.getItem(chave);
+      if(!raw) return;
+      const estado = JSON.parse(raw);
+      // Restaura presentes — só se o membro ainda existe na lista atual
+      if(estado.presentes) estado.presentes.forEach(n=>{
+        if(MEMBROS_LISTA.includes(n)) presSalao[n]=true;
+      });
+      buildChips();
+      buildSalaoSlots(false);
+      // Restaura funções especiais — só se o nome ainda existe no grupo da função
+      if(estado.funcoes) Object.entries(estado.funcoes).forEach(([fid,vals])=>{
+        const f = FUNCOES.find(x=>x.id===fid);
+        vals.forEach((v,i)=>{
+          const el=document.getElementById(`func_${fid}_${i}`);
+          // Valida que o nome ainda existe como opção válida
+          if(el && v && f && f.grupo.includes(v)) el.value=v;
+        });
+      });
+      // Restaura salão — só slots dentro do salaoCount atual
+      if(estado.salao) Object.entries(estado.salao).forEach(([i,v])=>{
+        if(parseInt(i) >= culto.salaoCount) return; // ignora slots de culto com mais zonas
+        const el=document.getElementById(`salao_${i}`);
+        // Valida que o nome ainda está marcado como presente
+        if(el && v && presSalao[v]) el.value=v;
+      });
+    }catch(e){ console.error('Erro ao restaurar estado:', e); }
+  }
+
+  function limparEstadoLocal(){
+    const chave = chaveEstado();
+    if(chave) try{ localStorage.removeItem(chave); }catch(e){}
+  }
+
+  // Auto-salva ao mudar qualquer select da escala
+  document.addEventListener('change', function(e){
+    if(e.target.tagName==='SELECT'){
+      const id = e.target.id||'';
+      if(id.startsWith('func_') || id.startsWith('salao_')) salvarEstadoLocal();
+    }
+  });
+
+  // ========== LISTAS ==========
   function getMembros()    { return membros.map(m=>m.nome).sort(); }
   function getLideres()    { return membros.filter(m=>m.lider).map(m=>m.nome).sort(); }
   function getAssessoria() { return membros.filter(m=>m.assessoria && !m.homem).map(m=>m.nome).sort(); }
   function getHomensSet()  { return new Set(membros.filter(m=>m.homem).map(m=>m.nome)); }
 
-  let MEMBROS_LISTA  = getMembros();
-  let LISTA_LIDER    = getLideres();
-  let LISTA_ASSESS   = getAssessoria();
-  let HOMENS_SET     = getHomensSet();
+  let MEMBROS_LISTA = getMembros();
+  let LISTA_LIDER   = getLideres();
+  let LISTA_ASSESS  = getAssessoria();
+  let HOMENS_SET    = getHomensSet();
 
   const FUNCOES = [
     { id:'assessoria', label:'Assessoria',          cor:'#22c55e', slots:1, grupo: LISTA_ASSESS },
@@ -398,15 +419,9 @@
   ];
 
   function reconstruirListas(){
-    MEMBROS_LISTA = getMembros();
-    LISTA_LIDER   = getLideres();
-    LISTA_ASSESS  = getAssessoria();
-    HOMENS_SET    = getHomensSet();
-    FUNCOES[0].grupo = LISTA_ASSESS;
-    FUNCOES[1].grupo = LISTA_LIDER;
-    FUNCOES[2].grupo = MEMBROS_LISTA;
-    FUNCOES[3].grupo = MEMBROS_LISTA;
-    FUNCOES[4].grupo = MEMBROS_LISTA;
+    MEMBROS_LISTA = getMembros(); LISTA_LIDER = getLideres(); LISTA_ASSESS = getAssessoria(); HOMENS_SET = getHomensSet();
+    FUNCOES[0].grupo=LISTA_ASSESS; FUNCOES[1].grupo=LISTA_LIDER;
+    FUNCOES[2].grupo=MEMBROS_LISTA; FUNCOES[3].grupo=MEMBROS_LISTA; FUNCOES[4].grupo=MEMBROS_LISTA;
   }
 
   let presSalao = {};
@@ -453,37 +468,33 @@
   }
 
   function buildChips(){
-    const usados = jaUsados();
-    const c = document.getElementById('chipsSalaoLista'); c.innerHTML='';
-    [...MEMBROS_LISTA].sort().forEach(n => {
-      const on  = presSalao[n];
-      const ind = usados.has(n);
-      c.innerHTML += `<div class="chip-nome${on?' on':''}${ind?' ind':''}" onclick="toggleChip('${n}')">${n}</div>`;
+    const usados=jaUsados();
+    const c=document.getElementById('chipsSalaoLista'); c.innerHTML='';
+    [...MEMBROS_LISTA].sort().forEach(n=>{
+      const on=presSalao[n], ind=usados.has(n);
+      c.innerHTML+=`<div class="chip-nome${on?' on':''}${ind?' ind':''}" onclick="toggleChip('${n}')">${n}</div>`;
     });
-    renderChipsSelecionados();
-    atualizarBadge();
+    renderChipsSelecionados(); atualizarBadge();
   }
 
   function renderChipsSelecionados(){
-    const sel = document.getElementById('chipsSelecionados');
-    const nomesSel = MEMBROS_LISTA.filter(n=>presSalao[n]).sort();
-    sel.innerHTML = nomesSel.length === 0 ? '' : nomesSel.map(n =>
-      `<div class="chip-sel">${n}<span class="rem" onclick="desmarcar('${n}')">×</span></div>`
-    ).join('');
+    const sel=document.getElementById('chipsSelecionados');
+    const nomesSel=MEMBROS_LISTA.filter(n=>presSalao[n]).sort();
+    sel.innerHTML=nomesSel.length===0?'':nomesSel.map(n=>`<div class="chip-sel">${n}<span class="rem" onclick="desmarcar('${n}')">×</span></div>`).join('');
   }
 
-  function desmarcar(nome){ presSalao[nome]=false; buildChips(); buildSalaoSlots(true); }
+  function desmarcar(nome){ presSalao[nome]=false; buildChips(); buildSalaoSlots(true); salvarEstadoLocal(); }
 
   function toggleDropdown(){
     document.getElementById('dropTrigger').classList.toggle('aberto');
     document.getElementById('dropPainel').classList.toggle('aberto');
   }
 
-  function toggleChip(nome){ presSalao[nome]=!presSalao[nome]; buildChips(); buildSalaoSlots(true); }
+  function toggleChip(nome){ presSalao[nome]=!presSalao[nome]; buildChips(); buildSalaoSlots(true); salvarEstadoLocal(); }
 
   function atualizarBadge(){
-    const total = MEMBROS_LISTA.filter(n=>presSalao[n]).length;
-    document.getElementById('badgeSalao').textContent = `${total} presentes`;
+    const total=MEMBROS_LISTA.filter(n=>presSalao[n]).length;
+    document.getElementById('badgeSalao').textContent=`${total} presentes`;
   }
 
   function buildSalaoSlots(manterValores){
@@ -505,18 +516,23 @@
     buildSalaoSlots(false);
     document.getElementById('dropTrigger').classList.remove('aberto');
     document.getElementById('dropPainel').classList.remove('aberto');
+    // Restaura último estado salvo para este culto
+    restaurarEstadoLocal();
   }
 
-  function embaralhar(l){let c=[...l];for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]];}return c;}
-
-  function limparSalao(){
+  // Nova escala — limpa tudo e apaga rascunho
+  function novaEscala(){
     const culto=getCulto();
-    for(let i=0;i<culto.salaoCount;i++) document.getElementById(`salao_${i}`).value='';
+    FUNCOES.forEach(f=>{ for(let i=0;i<f.slots;i++){ const el=document.getElementById(`func_${f.id}_${i}`); if(el) el.value=''; }});
+    for(let i=0;i<culto.salaoCount;i++){ const el=document.getElementById(`salao_${i}`); if(el) el.value=''; }
     MEMBROS_LISTA.forEach(n=>presSalao[n]=false);
     buildChips();
+    limparEstadoLocal();
     document.getElementById('dropTrigger').classList.remove('aberto');
     document.getElementById('dropPainel').classList.remove('aberto');
   }
+
+  function embaralhar(l){let c=[...l];for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]];}return c;}
 
   function distribuirEFechar(){ distribuirSalao(); document.getElementById('dropTrigger').classList.remove('aberto'); document.getElementById('dropPainel').classList.remove('aberto'); }
 
@@ -536,17 +552,13 @@
       if(idxDir!==undefined){
         const pEsq=hNaEsq?(ih<H.length?H[ih++]:im<M.length?M[im++]:null):(im<M.length?M[im++]:ih<H.length?H[ih++]:null);
         const pDir=hNaEsq?(im<M.length?M[im++]:ih<H.length?H[ih++]:null):(ih<H.length?H[ih++]:im<M.length?M[im++]:null);
-        if(pEsq)resultado[idxEsq]=pEsq;
-        if(pDir)resultado[idxDir]=pDir;
-        hNaEsq=!hNaEsq;
-      } else {
-        const p=ih<H.length?H[ih++]:im<M.length?M[im++]:null;
-        if(p)resultado[idxEsq]=p;
-      }
+        if(pEsq)resultado[idxEsq]=pEsq; if(pDir)resultado[idxDir]=pDir; hNaEsq=!hNaEsq;
+      } else { const p=ih<H.length?H[ih++]:im<M.length?M[im++]:null; if(p)resultado[idxEsq]=p; }
     }
     let vazias=0;
     for(let i=0;i<culto.salaoCount;i++){const sel=document.getElementById(`salao_${i}`);if(!sel.value){if(resultado[i])sel.value=resultado[i];else vazias++;}}
     if(vazias>0)alert(`Aviso: ${vazias} vaga(s) vazias — marque mais presentes.`);
+    salvarEstadoLocal();
   }
 
   function gerarImagem(){
@@ -576,22 +588,16 @@
   // ========== GESTÃO DE MEMBROS ==========
   let filtroAtual = 'todos';
 
-  function abrirGestao(){
-    document.getElementById('modalOverlay').classList.add('aberto');
-    document.getElementById('inputBusca').value='';
-    renderListaModal();
-  }
+  function abrirGestao(){ document.getElementById('modalOverlay').classList.add('aberto'); document.getElementById('inputBusca').value=''; renderListaModal(); }
   function fecharGestao(){ document.getElementById('modalOverlay').classList.remove('aberto'); }
   function fecharSeForaModal(e){ if(e.target===document.getElementById('modalOverlay')) fecharGestao(); }
 
   function setFiltro(f){
     filtroAtual=f;
     ['todos','lideres','assessoria','homens','mulheres'].forEach(id=>{
-      document.getElementById('filtro'+id.charAt(0).toUpperCase()+id.slice(1)).classList.toggle('ativo', id===f);
+      document.getElementById('filtro'+id.charAt(0).toUpperCase()+id.slice(1)).classList.toggle('ativo',id===f);
     });
-    // Esconde o botão Adicionar nos filtros Líderes e Assessoria
-    const ocultar = f==='lideres' || f==='assessoria';
-    document.getElementById('addSection').style.display = ocultar ? 'none' : 'block';
+    document.getElementById('addSection').style.display=(f==='lideres'||f==='assessoria')?'none':'block';
     renderListaModal();
   }
 
@@ -604,27 +610,15 @@
     if(filtroAtual==='mulheres')   lista=lista.filter(m=>!m.homem);
     if(busca) lista=lista.filter(m=>m.nome.toLowerCase().includes(busca));
     const c=document.getElementById('listaMembrosModal');
-    if(lista.length===0){
-      c.innerHTML=`<p style="font-size:13px;color:#9095A0;text-align:center;padding:20px 0;">Nenhum membro encontrado.</p>`;
-      return;
-    }
+    if(lista.length===0){ c.innerHTML=`<p style="font-size:13px;color:#9095A0;text-align:center;padding:20px 0;">Nenhum membro encontrado.</p>`; return; }
     c.innerHTML=lista.map(m=>`
       <div class="membro-item" id="item_${encodeURIComponent(m.nome)}">
         <span class="membro-nome${m.homem?' homem':''}">${m.nome}</span>
         <div class="membro-acoes">
-          <button class="toggle-btn ${m.homem?'toggle-homem ativo':'toggle-mulher ativo'}"
-            data-acao="homem" data-nome="${encodeURIComponent(m.nome)}">
-            ${m.homem?'Homem':'Mulher'}
-          </button>
-          <button class="toggle-btn toggle-lider ${m.lider?'ativo':'inativo'}"
-            data-acao="lider" data-nome="${encodeURIComponent(m.nome)}">
-            ${m.lider?'★ Líder':'☆ Líder'}
-          </button>
-          ${!m.homem?`<button class="toggle-btn toggle-assess ${m.assessoria?'ativo':'inativo'}"
-            data-acao="assessoria" data-nome="${encodeURIComponent(m.nome)}">
-            ${m.assessoria?'✦ Assess.':'✧ Assess.'}</button>`:''}
-          <button class="btn-remover-membro"
-            data-acao="remover" data-nome="${encodeURIComponent(m.nome)}">Excluir</button>
+          <button class="toggle-btn ${m.homem?'toggle-homem ativo':'toggle-mulher ativo'}" data-acao="homem" data-nome="${encodeURIComponent(m.nome)}">${m.homem?'Homem':'Mulher'}</button>
+          <button class="toggle-btn toggle-lider ${m.lider?'ativo':'inativo'}" data-acao="lider" data-nome="${encodeURIComponent(m.nome)}">${m.lider?'★ Líder':'☆ Líder'}</button>
+          ${!m.homem?`<button class="toggle-btn toggle-assess ${m.assessoria?'ativo':'inativo'}" data-acao="assessoria" data-nome="${encodeURIComponent(m.nome)}">${m.assessoria?'✦ Assess.':'✧ Assess.'}</button>`:''}
+          <button class="btn-remover-membro" data-acao="remover" data-nome="${encodeURIComponent(m.nome)}">Excluir</button>
         </div>
       </div>
       <div class="confirmar-remocao" id="conf_${encodeURIComponent(m.nome)}" style="display:none;">
@@ -634,85 +628,46 @@
       </div>`).join('');
   }
 
-  // Event delegation — sem confirm() que bloqueia em mobile
   document.getElementById('listaMembrosModal').addEventListener('click', function(e){
-    const btn=e.target.closest('[data-acao]');
-    if(!btn) return;
-    const nomeEnc=btn.dataset.nome;
-    const nome=decodeURIComponent(nomeEnc);
-    const acao=btn.dataset.acao;
-
-    if(acao==='remover'){
-      // Mostra confirmação inline
-      document.getElementById(`conf_${nomeEnc}`).style.display='flex';
-      document.getElementById(`item_${nomeEnc}`).style.opacity='0.4';
-      return;
-    }
-    if(acao==='cancelar-remover'){
-      document.getElementById(`conf_${nomeEnc}`).style.display='none';
-      document.getElementById(`item_${nomeEnc}`).style.opacity='1';
-      return;
-    }
-    if(acao==='confirmar-remover'){
-      membros=membros.filter(x=>x.nome!==nome);
-      salvarMembros();
-      renderListaModal();
-      return;
-    }
-
-    const m=membros.find(x=>x.nome===nome);
-    if(!m) return;
-    if(acao==='lider'){
-      m.lider=!m.lider;
-    } else if(acao==='homem'){
-      m.homem=!m.homem;
-      if(m.homem) m.assessoria=false;
-    } else if(acao==='assessoria'){
-      if(!m.homem) m.assessoria=!m.assessoria;
-    }
-    salvarMembros();
-    renderListaModal();
+    const btn=e.target.closest('[data-acao]'); if(!btn) return;
+    const nomeEnc=btn.dataset.nome, nome=decodeURIComponent(nomeEnc), acao=btn.dataset.acao;
+    if(acao==='remover'){ document.getElementById(`conf_${nomeEnc}`).style.display='flex'; document.getElementById(`item_${nomeEnc}`).style.opacity='0.4'; return; }
+    if(acao==='cancelar-remover'){ document.getElementById(`conf_${nomeEnc}`).style.display='none'; document.getElementById(`item_${nomeEnc}`).style.opacity='1'; return; }
+    if(acao==='confirmar-remover'){ membros=membros.filter(x=>x.nome!==nome); salvarMembros(); renderListaModal(); return; }
+    const m=membros.find(x=>x.nome===nome); if(!m) return;
+    if(acao==='lider') m.lider=!m.lider;
+    else if(acao==='homem'){ m.homem=!m.homem; if(m.homem) m.assessoria=false; }
+    else if(acao==='assessoria'){ if(!m.homem) m.assessoria=!m.assessoria; }
+    salvarMembros(); renderListaModal();
   });
 
-  let novoMembroHomem = false; // padrão mulher
-
-  function selecionarGenero(g){
-    novoMembroHomem = (g === 'homem');
-    document.getElementById('btnHomem').classList.toggle('ativo', novoMembroHomem);
-    document.getElementById('btnMulher').classList.toggle('ativo', !novoMembroHomem);
-  }
-
+  let novoMembroHomem = false;
+  function selecionarGenero(g){ novoMembroHomem=(g==='homem'); document.getElementById('btnHomem').classList.toggle('ativo',novoMembroHomem); document.getElementById('btnMulher').classList.toggle('ativo',!novoMembroHomem); }
   function adicionarMembro(){
-    const input=document.getElementById('inputNovoNome');
-    const nome=input.value.trim();
+    const input=document.getElementById('inputNovoNome'); const nome=input.value.trim();
     if(!nome){input.focus();return;}
     if(membros.find(m=>m.nome.toLowerCase()===nome.toLowerCase())){alert('Este nome já existe na lista.');return;}
-    membros.push({nome, homem: novoMembroHomem, lider:false, assessoria:false});
-    input.value='';
-    // Resetar para mulher após adicionar
-    novoMembroHomem = false;
-    selecionarGenero('mulher');
-    salvarMembros();
-    renderListaModal();
+    membros.push({nome, homem:novoMembroHomem, lider:false, assessoria:false});
+    input.value=''; novoMembroHomem=false; selecionarGenero('mulher');
+    salvarMembros(); renderListaModal();
   }
 
-  // Init
+  // ========== INIT ==========
   reconstruirListas();
   resetPresencas();
-  mudarCulto();
+  mudarCulto(); // já chama restaurarEstadoLocal internamente
 
-  // Sobrescreve com Firebase (fonte verdadeira para todos)
   carregarMembrosDB().then(dados => {
     if(dados && dados.length > 0){
       membros = dados;
       localStorage.setItem('membros_ministerio', JSON.stringify(membros));
     } else if(dados !== null){
-      salvarMembrosDB(); // Firebase vazio — sobe dados locais
+      salvarMembrosDB();
     }
     reconstruirListas();
     resetPresencas();
     mudarCulto();
-  }).catch(() => { /* Firebase indisponível — usa local */ });
+  }).catch(()=>{});
 </script>
 </body>
 </html>
